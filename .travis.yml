@@ -1,0 +1,45 @@
+dist: bionic # this is the most recent Ubuntu image available
+language: cpp
+cache: ccache
+matrix:
+  include:
+    - name: GCC 10 on Linux
+      os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-10
+      env:
+        - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=g++-10"
+    - name: Clang 10 on Linux
+      os: linux
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-10
+      env:
+        - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=clang++-10"
+    - name: Clang 10 on macOS
+      os: osx
+      osx_image: xcode10.3 # this image has CLang 10.0.1 (same as Linux) and CMake 3.15
+      env:
+        - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=clang++"
+    - name: MSVC 2017 on Windows
+      os: windows
+      env:
+        - MATRIX_EVAL="CMAKE_GENERATOR='Visual Studio 15 2017'"
+before_install:
+  - eval "${MATRIX_EVAL}"
+before_script:
+  - cd build
+  - cmake -G "$CMAKE_GENERATOR" ..
+script:
+  - cmake --build . -j
+  - ctest
