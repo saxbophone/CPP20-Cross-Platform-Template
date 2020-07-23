@@ -19,8 +19,6 @@ A template for a cross-platform C++20 project including CMake, unit-testing with
         - Replace all instances of `PROJ` or `proj` with your project's name, capitalised or uncapitalised as appropriate
     - `Doxyfile`:
         - Change the `PROJECT_NAME` and `INPUT` settings to your project's name.
-    - `LICENSE`:
-        - Do with this what you will. You probably want to at a bare minimum change the statement that would otherwise assert my copyright on _your_ work, you may wish to (and it might even be advisable) to leave a statement acknowledging this template, but it's nought but a project template ultimately, also I'm not in a position to give legal advice. Note that the BSD 3-clause licence was chosen as that's the licence attached to some of the CMake files in `cmake/Modules`, which I did not produce.
     - `proj`:
         - Rename this directory to the name of your project.
 4. Enjoy!
