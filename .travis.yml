@@ -3,6 +3,17 @@ language: cpp
 cache: ccache
 matrix:
   include:
+    - name: Docs only on Linux
+      os: linux
+      addons:
+        apt:
+          packages:
+            - doxygen
+            - graphviz
+      before_install: skip
+      before_script: skip
+      script:
+        - doxygen Doxyfile
     - name: GCC 10 on Linux
       os: linux
       addons:
