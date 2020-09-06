@@ -43,31 +43,37 @@ endfunction()
 # enable extra flags (warnings) if we're not in release mode
 if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "")
     message(STATUS "[proj] Warnings Enabled")
-    # enable all warnings about 'questionable constructs'
-    enable_cxx_compiler_flag_if_supported("-Wall")
-    # issue 'pedantic' warnings for strict ISO compliance
-    enable_cxx_compiler_flag_if_supported("-pedantic")
-    # enable 'extra' strict warnings
-    enable_cxx_compiler_flag_if_supported("-Wextra")
-    # enable sign and type conversion warnings
-    enable_cxx_compiler_flag_if_supported("-Wsign-conversion")
-    # enable warnings about mistakes in Doxygen documentation
-    enable_cxx_compiler_flag_if_supported("-Wdocumentation")
-    # convert all warnings into errors
-    enable_cxx_compiler_flag_if_supported("-Werror")
-    # exclude the following kinds of warnings from being converted into errors
-    # there are some pragmas in tests/check_wrapper.h that are not for GCC
-    enable_cxx_compiler_flag_if_supported("-Wno-error=unknown-pragmas")
-    # unused variable and function warnings are helpful but we don't need them as errors
-    enable_cxx_compiler_flag_if_supported("-Wno-error=unused-function")
-    enable_cxx_compiler_flag_if_supported("-Wno-error=unused-variable")
-    enable_cxx_compiler_flag_if_supported("-Wno-error=unused-parameter")
+    if (MSVC) # MSVC supports different warning options to GCC/Clang
+        add_compile_options(/WX /W3) # treat all warnings as errors, set warning level 3
+    else() # GCC/Clang warning option
+        # NOTE: GCC and Clang support most of the same options, but neither supports all
+        # of the others'. By only enabling them if supported, we get graceful failure
+        # when trying to enable unsupported flags
+        # e.g. at the time of writing, GCC does not support -Wdocumentation
+        #
+        # enable all warnings about 'questionable constructs'
+        enable_cxx_compiler_flag_if_supported("-Wall")
+        # issue 'pedantic' warnings for strict ISO compliance
+        enable_cxx_compiler_flag_if_supported("-pedantic")
+        # enable 'extra' strict warnings
+        enable_cxx_compiler_flag_if_supported("-Wextra")
+        # enable sign conversion warnings
+        enable_cxx_compiler_flag_if_supported("-Wsign-conversion")
+        # enable warnings about mistakes in Doxygen documentation
+        enable_cxx_compiler_flag_if_supported("-Wdocumentation")
+        # convert all warnings into errors
+        enable_cxx_compiler_flag_if_supported("-Werror")
+        # exclude the following kinds of warnings from being converted into errors
+        # unknown-pragma is useful to have as a warning but not as an error, if you have
+        # pragmas which are for the consumption of one compiler only
+        enable_cxx_compiler_flag_if_supported("-Wno-error=unknown-pragmas")
+        # unused variable and function warnings are helpful but we don't need them as errors
+        enable_cxx_compiler_flag_if_supported("-Wno-error=unused-function")
+        enable_cxx_compiler_flag_if_supported("-Wno-error=unused-variable")
+        enable_cxx_compiler_flag_if_supported("-Wno-error=unused-parameter")
+    endif()
 endif()
 
-# MSVC options appear unable to be set using this method, so they are set here instead
-if (MSVC)
-    add_compile_options(/WX /W3) # treat all warnings as errors, set warning level 3
-endif()
 
 # add custom dependencies directory
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
