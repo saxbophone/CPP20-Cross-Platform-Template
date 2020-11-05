@@ -2,6 +2,11 @@
 # minimum CMake version required for C++20 support, among other things
 cmake_minimum_required(VERSION 3.12)
 
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+endif()
+
 project(proj VERSION 0.0.0 LANGUAGES CXX)
 
 # set the C++ standard to use to C++20 always
