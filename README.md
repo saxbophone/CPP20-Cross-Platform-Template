@@ -7,7 +7,7 @@ A template for a cross-platform C++20 project including CMake, unit-testing with
 - Travis-CI config file supporting building and running tests on Linux, macOS and Windows using the following compilers:
     - Linux: GCC-10, Clang-10
     - macOS: Clang-10
-    - Windows: MSVC 2017
+    - Windows: MSVC 2019
     - 1 Additional build on Linux to check Doxygen documentation is well-formed
 - Doxygen config file with tweaks from the default config settings to provide a few more graphs (usage, caller/callee relationships) than are enabled by default.
 

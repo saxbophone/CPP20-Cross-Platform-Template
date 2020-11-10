@@ -39,15 +39,17 @@ matrix:
         - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=clang++-10"
     - name: Clang 10 on macOS
       os: osx
-      osx_image: xcode10.3 # this image has CLang 10.0.1 (same as Linux) and CMake 3.15
+      osx_image: xcode12.2 # this image has Clang >10.0.1 and CMake >3.15
       env:
         - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=clang++"
-    - name: MSVC 2017 on Windows
+    - name: MSVC 2019 on Windows
       os: windows
       env:
-        - MATRIX_EVAL="CMAKE_GENERATOR='Visual Studio 15 2017'"
+        - MATRIX_EVAL="CMAKE_GENERATOR='Visual Studio 16 2019'"
 before_install:
   - eval "${MATRIX_EVAL}"
+install:
+  - if [ $TRAVIS_OS_NAME = 'windows' ]; then choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"; fi
 before_script:
   - cd build
   - cmake -G "$CMAKE_GENERATOR" ..
