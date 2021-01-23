@@ -4,4 +4,5 @@
  * https://github.com/catchorg/Catch2/blob/master/docs/slow-compiles.md#practical-example
  */
 #define CATCH_CONFIG_MAIN
+#include <sstream> // Catch2 regression: https://github.com/catchorg/Catch2/issues/1629
 #include "../vendor/catch.hpp"
