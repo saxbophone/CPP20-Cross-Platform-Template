@@ -51,9 +51,9 @@ jobs:
         # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
         run: cmake --install . --config Debug
 
-      # Only run last three steps if this is a release
+      # Only run last two steps if this is a release
       - name: Release
-        # if: github.event == 'release'
+        if: github.event == 'release'
         env:
           CXX: ${{ matrix.cxx }}
         # Use a bash shell so we can use the same syntax for environment variable
@@ -70,7 +70,7 @@ jobs:
 
       # Only Upload releases
       - name: Upload
-        # if: github.event == 'release'
+        if: github.event == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: build_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
