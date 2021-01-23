@@ -57,7 +57,7 @@ jobs:
 
       # Only Upload releases
       - name: Upload
-        if: github.event == 'release'
+        # if: github.event == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: build_$GITHUB_REF_${{ matrix.os }}_${{ matrix.cxx }}
