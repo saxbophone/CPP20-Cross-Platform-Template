@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-20.04]
-        cxx: [g++-10, clang]
+        cxx: [g++-10, clang++]
         include:
           - os: windows-latest
             cxx: msvc
