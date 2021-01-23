@@ -5,11 +5,13 @@ on:
   release:
     types: [published]
 
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  if: ${{ github.event != 'release' }}
+# Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+if: ${{ github.event != 'release' }}
+  env:
     BUILD_TYPE: Debug
-  if: ${{ github.event == 'release' }}
+
+if: ${{ github.event == 'release' }}
+  env:
     BUILD_TYPE: Release
 
 jobs:
