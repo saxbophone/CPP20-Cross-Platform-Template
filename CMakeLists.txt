@@ -96,7 +96,7 @@ set(PROJ_CLI_SOURCE "main.cpp")
 # C++ source files for unit tests
 file(GLOB TEST_SOURCES "tests/*.cpp")
 # Header files
-set(PROJ_HEADERS "proj/*.hpp")
+set(PROJ_HEADERS "proj/proj.hpp")
 
 # if project is a library
 add_library(proj ${PROJ_SOURCES})
