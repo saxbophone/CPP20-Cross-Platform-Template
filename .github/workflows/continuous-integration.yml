@@ -12,10 +12,13 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
+        cxx: [g++-10, clang]
     steps:
       - uses: actions/checkout@v2
 
       - name: Configure CMake
+        env:
+          CXX: ${{ matrix.cxx }}
         # Use a bash shell so we can use the same syntax for environment variable
         # access regardless of the host operating system
         shell: bash
