@@ -50,7 +50,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
-        run: cmake --install .
+        run: cmake --install . --config $BUILD_TYPE
         
       - uses: actions/upload-artifact@v2
         with:
