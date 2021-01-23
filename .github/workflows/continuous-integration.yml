@@ -53,7 +53,7 @@ jobs:
 
       # Only run last two steps if this is a release
       - name: Release
-        if: github.event == 'release'
+        if: github.event_name == 'release'
         env:
           CXX: ${{ matrix.cxx }}
         # Use a bash shell so we can use the same syntax for environment variable
@@ -70,7 +70,7 @@ jobs:
 
       # Only Upload releases
       - name: Upload
-        if: github.event == 'release'
+        if: github.event_name == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: build_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
