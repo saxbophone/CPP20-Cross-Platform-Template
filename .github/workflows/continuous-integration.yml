@@ -5,15 +5,6 @@ on:
   release:
     types: [published]
 
-# Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-if: ${{ github.event != 'release' }}
-  env:
-    BUILD_TYPE: Debug
-
-if: ${{ github.event == 'release' }}
-  env:
-    BUILD_TYPE: Release
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -39,30 +30,47 @@ jobs:
         # Note the current convention is to use the -S and -B options here to specify source 
         # and build directories, but this is only available with CMake 3.13 and higher.  
         # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE/artifacts
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE/artifacts
 
       - name: Build
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Execute the build.  You can specify a specific target with "--target <NAME>"
-        run: cmake --build . --config $BUILD_TYPE
+        run: cmake --build . --config Debug
 
       - name: Test
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Execute tests defined by the CMake configuration.  
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-        run: ctest -C $BUILD_TYPE
+        run: ctest -C Debug
 
       - name: Install
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
-        run: cmake --install . --config $BUILD_TYPE
+        run: cmake --install . --config Debug
+
+      # Only run last three steps if this is a release
+      - name: Release
+        # if: github.event == 'release'
+        env:
+          CXX: ${{ matrix.cxx }}
+        # Use a bash shell so we can use the same syntax for environment variable
+        # access regardless of the host operating system
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        # Note the current convention is to use the -S and -B options here to specify source 
+        # and build directories, but this is only available with CMake 3.13 and higher.  
+        # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+        run: |
+          cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE/artifacts
+          cmake --build . --config Release
+          cmake --install . --config Release
 
       # Only Upload releases
       - name: Upload
-        if: github.event == 'release'
+        # if: github.event == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: build_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
