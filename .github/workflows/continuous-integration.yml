@@ -1,6 +1,9 @@
 name: continuous-integration
 
-on: [push]
+on:
+  push:
+  release:
+    types: [published]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -51,8 +54,11 @@ jobs:
         shell: bash
         # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
         run: cmake --install . --config $BUILD_TYPE
-        
-      - uses: actions/upload-artifact@v2
+
+      # Only Upload releases
+      - name: Upload
+        if: github.event == 'release'
+        uses: actions/upload-artifact@v2
         with:
-          name: build_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
+          name: build_$GITHUB_REF_${{ matrix.os }}_${{ matrix.cxx }}
           path: ${{github.workspace}}/artifacts
