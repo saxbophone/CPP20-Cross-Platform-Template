@@ -60,5 +60,5 @@ jobs:
         # if: github.event == 'release'
         uses: actions/upload-artifact@v2
         with:
-          name: build_${{ GITHUB_REF }}_${{ matrix.os }}_${{ matrix.cxx }}
+          name: build_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
           path: ${{github.workspace}}/artifacts
