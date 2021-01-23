@@ -1,5 +1,5 @@
 # CPP20-Cross-Platform-Template
-A template for a cross-platform C++20 project including CMake, unit-testing with Catch and cross-platform Travis-CI
+A template for a cross-platform C++20 project including CMake, unit-testing with Catch, cross-platform CI with Travis-CI/Github Actions and cross-platform release builds using Github Actions.
 
 ## What's included
 - CMake C++20 project skeleton, with strict warning flags enabled when using GCC or Clang.
@@ -9,6 +9,9 @@ A template for a cross-platform C++20 project including CMake, unit-testing with
     - macOS: Clang-10
     - Windows: MSVC 2019
     - 1 Additional build on Linux to check Doxygen documentation is well-formed
+- Github Action config file supporting:
+    - Building and running tests on the same Operating Systems and Compilers as Travis-CI (additionally, GCC-10 on macOS)
+    - Building Releases on each platform when a Github Release is published, uploading these as build Artifacts.
 - Doxygen config file with tweaks from the default config settings to provide a few more graphs (usage, caller/callee relationships) than are enabled by default.
 
 ## Usage
