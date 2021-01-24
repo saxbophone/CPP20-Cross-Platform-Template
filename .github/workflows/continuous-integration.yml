@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-10.15, ubuntu-20.04]
-        # has no effect on Windows, no problem
         cxx: [g++-10, clang++]
         include:
           - os: windows-2019

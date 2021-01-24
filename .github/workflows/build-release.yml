@@ -13,13 +13,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-10.15, windows-2019]
-        # has no effect on Windows, no problem
-        cxx: [clang++]
+        # specify a specific compiler to build with each OS separately
         include:
-          # override compiler when on Ubuntu to g++-10 (chooses g++-9 by default)
+          - os: macos-10.15
+            cxx: clang++
+            nickname: macos
+        include:
           - os: ubuntu-20.04
             cxx: g++-10
+            nickname: linux
+        include:
+          # NOTE: CXX seems to be ignored on Windows, but specify it anyway for consistency
+          - os: windows-2019
+            cxx: msvc
+            nickname: windows
 
     steps:
       - uses: actions/checkout@v2
@@ -51,5 +58,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: build_${{ github.sha }}_${{ matrix.os }}
+          name: build_${{ github.sha }}_${{ matrix.nickname }}
           path: ${{github.workspace}}/artifacts
