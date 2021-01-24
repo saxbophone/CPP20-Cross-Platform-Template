@@ -1,23 +1,28 @@
-name: continuous-integration
+name: build-release
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  release:
+    types: [published]
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     env:
-      BUILD_TYPE: Debug
+      BUILD_TYPE: Release
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-10.15, ubuntu-20.04]
-        cxx: [g++-10, clang++]
+        # specify a specific compiler to build with each OS separately
         include:
-          - os: windows-2019
+          - platform_name: linux
+            os: ubuntu-20.04
+            cxx: g++-10
+          - platform_name: macos
+            os: macos-10.15
+            cxx: clang++
+          # NOTE: CXX seems to be ignored on Windows, but specify it anyway for consistency
+          - platform_name: windows
+            os: windows-2019
             cxx: msvc
 
     steps:
@@ -41,15 +46,14 @@ jobs:
         # Execute the build.  You can specify a specific target with "--target <NAME>"
         run: cmake --build . --config $BUILD_TYPE
 
-      - name: Test
+      - name: Install
         working-directory: ${{github.workspace}}/build
         shell: bash
-        # Execute tests defined by the CMake configuration.  
-        # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-        run: ctest -C $BUILD_TYPE
-
-      - name: Test Install
-        working-directory: ${{github.workspace}}/build
-        shell: bash
-        # Test install with CMake to the "artifacts" directory
+        # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
         run: cmake --install . --config $BUILD_TYPE
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: build_${{ github.run_number }}_${{ matrix.platform_name }}
+          path: ${{github.workspace}}/artifacts
