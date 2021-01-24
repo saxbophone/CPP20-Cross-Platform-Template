@@ -18,11 +18,9 @@ jobs:
           - os: macos-10.15
             cxx: clang++
             nickname: macos
-        include:
           - os: ubuntu-20.04
             cxx: g++-10
             nickname: linux
-        include:
           # NOTE: CXX seems to be ignored on Windows, but specify it anyway for consistency
           - os: windows-2019
             cxx: msvc
