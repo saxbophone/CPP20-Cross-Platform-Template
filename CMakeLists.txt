@@ -1,72 +1,121 @@
 # begin basic metadata
 # minimum CMake version required for C++20 support, among other things
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.15)
+
+# detect if Project is being used as a sub-project of another CMake project
+if(NOT DEFINED PROJECT_NAME)
+    set(PROJECT_SUBPROJECT OFF)
+else()
+    set(PROJECT_SUBPROJECT ON)
+endif()
+
+project(project VERSION 0.3.0 LANGUAGES CXX)
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
 endif()
 
-project(proj VERSION 0.0.0 LANGUAGES CXX)
+# Set a default build type if none was specified
+set(DEFAULT_BUILD_TYPE "Debug")
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE "${DEFAULT_BUILD_TYPE}" CACHE STRING "Choose the type of build." FORCE)
+    # Set the possible values of build type for cmake-gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+# set some handy custom variables to detect Release-type builds from Debug-type ones
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(PROJECT_BUILD_DEBUG ON)
+    set(PROJECT_BUILD_RELEASE OFF)
+else()
+    set(PROJECT_BUILD_DEBUG OFF)
+    set(PROJECT_BUILD_RELEASE ON)
+endif()
+
+message(STATUS "[project] Build Mode: ${CMAKE_BUILD_TYPE}")
 
 # set the C++ standard to use to C++20 always
-set(PROJ_CXX_STANDARD "20")
-message(STATUS "[proj] C++ Standard set to C++${PROJ_CXX_STANDARD}")
-set(CMAKE_CXX_STANDARD ${PROJ_CXX_STANDARD})
+set(PROJECT_CXX_STANDARD "20")
+message(STATUS "[project] C++ Standard set to C++${PROJECT_CXX_STANDARD}")
+set(CMAKE_CXX_STANDARD ${PROJECT_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(CMakeDependentOption)
+# if building in Release mode, provide an option to explicitly enable tests if desired (always ON for other builds, OFF by default for Release builds)
+cmake_dependent_option(ENABLE_TESTS "Build the unit tests in release mode?" OFF PROJECT_BUILD_RELEASE ON)
+
+# Premature Optimisation causes problems. Commented out code below allows detection and enabling of LTO.
+# It's not being used currently because it seems to cause linker errors with Clang++ on Ubuntu if the library
+# is compiled with LTO but the unit tests are not. This suggests LTO may force some downstream software into
+# using LTO also if it's enabled. The plan is to reënable LTO as an option in the future, possibly done much
+# more optionally (and probably not by default).
+
+# include(CheckIPOSupported)
+# check_ipo_supported(RESULT IPO_SUPPORTED)
+# # If we're in Release mode, set PROJECT_USE_IPO to ON by default if it's detected as supported (user can always explicitly enable it in Release mode)
+# cmake_dependent_option(PROJECT_USE_IPO "Use Link-Time/Inter-Procedural Optimisation?" ${IPO_SUPPORTED} PROJECT_BUILD_RELEASE OFF)
+# if(PROJECT_USE_IPO)
+#     message(STATUS "[project] Link-Time-Optimisation Enabled")
+# endif()
+
 set(
-    PROJ_VERSION_STRING
+    PROJECT_VERSION_STRING
     "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
 )
-set(PROJ_ESCAPED_VERSION_STRING "\"${PROJ_VERSION_STRING}\"")
+set(PROJECT_ESCAPED_VERSION_STRING "\"${PROJECT_VERSION_STRING}\"")
 # end basic metadata
 
-# pass in version of project as preprocessor definitions
-add_definitions(-DPROJ_VERSION_MAJOR=${PROJECT_VERSION_MAJOR})
-add_definitions(-DPROJ_VERSION_MINOR=${PROJECT_VERSION_MINOR})
-add_definitions(-DPROJ_VERSION_PATCH=${PROJECT_VERSION_PATCH})
-add_definitions(-DPROJ_VERSION_STRING=${PROJ_ESCAPED_VERSION_STRING})
+# This is a special target which only exists to capture compilation options
+# used for project and its tests. This is to avoid setting global compiler
+# options which would be inherited by dependencies as well, which is bad
+# because project uses strict compiler warning options which not all other
+# projects can build successfully with.
+# Any target linked with this one will inherit the compiler options used for
+# project.
+add_library(project-compiler-options INTERFACE)
 
 # used for enabling additional compiler options if supported
 include(CheckCXXCompilerFlag)
 
 function(enable_cxx_compiler_flag_if_supported flag)
-    message(STATUS "[proj] Checking if compiler supports warning flag '${flag}'")
-    string(FIND "${CMAKE_CXX_FLAGS}" "${flag}" flag_already_set)
-    if(flag_already_set EQUAL -1)
-        check_cxx_compiler_flag("${flag}" flag_supported)
-        if(flag_supported)
-            message(STATUS "[proj] Enabling warning flag '${flag}'")
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
-        endif()
+    message(STATUS "[project] Checking if compiler supports warning flag '${flag}'")
+    check_cxx_compiler_flag("${flag}" flag_supported)
+    if(flag_supported)
+        message(STATUS "[project] Enabling warning flag '${flag}'")
+        target_compile_options(project-compiler-options INTERFACE "${flag}")
     endif()
-    unset(flag_already_set CACHE)
     unset(flag_supported CACHE)
 endfunction()
 
-# enable extra flags (warnings) if we're not in release mode
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "")
-    message(STATUS "[proj] Warnings Enabled")
-    if (MSVC) # MSVC supports different warning options to GCC/Clang
-        add_compile_options(/WX /W3) # treat all warnings as errors, set warning level 3
-    else() # GCC/Clang warning option
-        # NOTE: GCC and Clang support most of the same options, but neither supports all
-        # of the others'. By only enabling them if supported, we get graceful failure
-        # when trying to enable unsupported flags
-        # e.g. at the time of writing, GCC does not support -Wdocumentation
-        #
-        # enable all warnings about 'questionable constructs'
-        enable_cxx_compiler_flag_if_supported("-Wall")
-        # issue 'pedantic' warnings for strict ISO compliance
-        enable_cxx_compiler_flag_if_supported("-pedantic")
-        # enable 'extra' strict warnings
-        enable_cxx_compiler_flag_if_supported("-Wextra")
-        # enable sign conversion warnings
-        enable_cxx_compiler_flag_if_supported("-Wsign-conversion")
-        # enable warnings about mistakes in Doxygen documentation
-        enable_cxx_compiler_flag_if_supported("-Wdocumentation")
-        # convert all warnings into errors
+# enable a large amount of extra warnings, regardless of build mode
+if (MSVC) # MSVC supports different warning options to GCC/Clang
+    # add_compile_options(/W4) # set warning level 4
+    enable_cxx_compiler_flag_if_supported("/W4")
+    # if in debug mode, enable converting all warnings to errors too
+    if (PROJECT_BUILD_DEBUG)
+        # add_compile_options(/WX)
+        enable_cxx_compiler_flag_if_supported("/WX")
+    endif()
+else() # GCC/Clang warning option
+    # NOTE: GCC and Clang support most of the same options, but neither supports all
+    # of the others'. By only enabling them if supported, we get graceful failure
+    # when trying to enable unsupported flags
+    # e.g. at the time of writing, GCC does not support -Wdocumentation
+    #
+    # enable all warnings about 'questionable constructs'
+    enable_cxx_compiler_flag_if_supported("-Wall")
+    # issue 'pedantic' warnings for strict ISO compliance
+    enable_cxx_compiler_flag_if_supported("-pedantic")
+    # enable 'extra' strict warnings
+    enable_cxx_compiler_flag_if_supported("-Wextra")
+    # enable sign conversion warnings
+    enable_cxx_compiler_flag_if_supported("-Wsign-conversion")
+    # enable warnings about mistakes in Doxygen documentation
+    enable_cxx_compiler_flag_if_supported("-Wdocumentation")
+    # if in debug mode, enable converting all warnings to errors too
+    if (PROJECT_BUILD_DEBUG)
         enable_cxx_compiler_flag_if_supported("-Werror")
         # exclude the following kinds of warnings from being converted into errors
         # unknown-pragma is useful to have as a warning but not as an error, if you have
@@ -76,86 +125,21 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "")
         enable_cxx_compiler_flag_if_supported("-Wno-error=unused-function")
         enable_cxx_compiler_flag_if_supported("-Wno-error=unused-variable")
         enable_cxx_compiler_flag_if_supported("-Wno-error=unused-parameter")
+        enable_cxx_compiler_flag_if_supported("-Wno-error=unused-private-field")
     endif()
 endif()
 
-
 # add custom dependencies directory
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
 
-# begin dependencies
+# a better way to load dependencies
+include(CPM)
 
-# ...Add additional dependencies here...
-
-# end dependencies
-
-# C++ library source files
-file(GLOB PROJ_SOURCES "proj/*.cpp")
-# C++ program source file
-set(PROJ_CLI_SOURCE "main.cpp")
-# C++ source files for unit tests
-file(GLOB TEST_SOURCES "tests/*.cpp")
-# Header files
-set(PROJ_HEADERS "proj/proj.hpp")
-
-# if project is a library
-add_library(proj ${PROJ_SOURCES})
-# set up version for library objects
-set_target_properties(
-    proj PROPERTIES VERSION ${PROJ_VERSION_STRING}
-    SOVERSION ${PROJECT_VERSION_MAJOR}
-)
-# link proj with C math library if we're on Linux
-if (UNIX AND NOT APPLE)
-    target_link_libraries(proj m)
+# library
+add_subdirectory(project)
+# unit tests --only enable if requested AND we're not building as a sub-project
+if(ENABLE_TESTS AND NOT PROJECT_SUBPROJECT)
+    message(STATUS "[project] Unit Tests Enabled")
+    add_subdirectory(tests)
+    enable_testing()
 endif()
-
-# the proj executable --this is the command-line program
-add_executable(proj-cli ${PROJ_CLI_SOURCE})
-# link the program with the library
-target_link_libraries(proj-cli proj)
-# set output name property so it will be called proj despite target name being different
-set_target_properties(proj-cli PROPERTIES OUTPUT_NAME proj)
-
-# build unit tests
-add_executable(unit_tests ${TEST_SOURCES})
-target_link_libraries(unit_tests proj)
-enable_testing()
-
-# auto-discover and add Catch2 tests from unit tests program
-include(CTest)
-include(Catch)
-
-catch_discover_tests(unit_tests)
-
-install(
-    TARGETS proj
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-)
-install(
-    TARGETS proj-cli
-    RUNTIME DESTINATION bin
-)
-
-# Generate rough (nearest major) version-dependent header installation folder
-set(
-    PROJ_ROUGH_HEADER_DESTINATION
-    "proj-${PROJECT_VERSION_MAJOR}"
-)
-# Generate precise (major and minor) version-dependent header installation folder
-set(
-    PROJ_PRECISE_HEADER_DESTINATION
-    "proj-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
-)
-
-# Install main library header files, both to rough and precise install locations
-install(
-    FILES ${PROJ_HEADERS}
-    DESTINATION "include/${PROJ_ROUGH_HEADER_DESTINATION}"
-)
-
-install(
-    FILES ${PROJ_HEADERS}
-    DESTINATION "include/${PROJ_PRECISE_HEADER_DESTINATION}"
-)

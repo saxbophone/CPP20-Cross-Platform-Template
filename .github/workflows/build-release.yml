@@ -55,5 +55,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: build_${{ github.run_number }}_${{ matrix.platform_name }}
+          name: project_build_${{ github.run_number }}_${{ matrix.platform_name }}
           path: ${{github.workspace}}/artifacts
