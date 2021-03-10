@@ -1,3 +1,7 @@
+# WARNING: The Travis-CI build config is unmaintained and may not work
+# This project needs CMake3.15+, but at the time of writing (2021-03-10),
+# Travis-CI provided CMake3.12 on Linux instances.
+
 dist: bionic # this is the most recent Ubuntu image available
 language: cpp
 cache: ccache

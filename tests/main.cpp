@@ -4,4 +4,4 @@
  * https://github.com/catchorg/Catch2/blob/master/docs/slow-compiles.md#practical-example
  */
 #define CATCH_CONFIG_MAIN
-#include "../vendor/catch.hpp"
+#include <catch2/catch.hpp>
