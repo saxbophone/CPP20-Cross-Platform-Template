@@ -18,6 +18,11 @@
 #define COM_SAXBOPHONE_PROJECT_PUBLIC_HPP
 
 namespace com::saxbophone::project {
+    /**
+     * @brief Stub test function for sample project
+     * @returns Whether the test library "works" or not, which is a vague
+     * question in of itself
+     */
     bool library_works();
 }
 
