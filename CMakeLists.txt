@@ -93,8 +93,8 @@ endfunction()
 if (MSVC) # MSVC supports different warning options to GCC/Clang
     # add_compile_options(/W4) # set warning level 4
     enable_cxx_compiler_flag_if_supported("/W4")
-    # if in debug mode, enable converting all warnings to errors too
-    if (PROJECT_BUILD_DEBUG)
+    # if tests are enabled, enable converting all warnings to errors too
+    if (ENABLE_TESTS)
         # add_compile_options(/WX)
         enable_cxx_compiler_flag_if_supported("/WX")
     endif()
@@ -114,8 +114,8 @@ else() # GCC/Clang warning option
     enable_cxx_compiler_flag_if_supported("-Wsign-conversion")
     # enable warnings about mistakes in Doxygen documentation
     enable_cxx_compiler_flag_if_supported("-Wdocumentation")
-    # if in debug mode, enable converting all warnings to errors too
-    if (PROJECT_BUILD_DEBUG)
+    # if tests are enabled, enable converting all warnings to errors too
+    if (ENABLE_TESTS)
         enable_cxx_compiler_flag_if_supported("-Werror")
         # exclude the following kinds of warnings from being converted into errors
         # unknown-pragma is useful to have as a warning but not as an error, if you have
