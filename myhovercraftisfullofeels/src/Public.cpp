@@ -4,11 +4,11 @@
  * <Copyright information goes here>
  */
 
-#include <project/Public.hpp>
+#include <myhovercraftisfullofeels/Public.hpp>
 
 #include "Private.hpp"
 
-namespace com::saxbophone::project {
+namespace com::saxbophone::myhovercraftisfullofeels {
     bool library_works() {
         return PRIVATE::library_works();
     }

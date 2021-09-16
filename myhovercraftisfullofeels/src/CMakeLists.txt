@@ -1,6 +1,6 @@
 # top-level namespace source files
 target_sources(
-    project
+    myhovercraftisfullofeels
         PRIVATE
             Private.cpp
             Public.cpp

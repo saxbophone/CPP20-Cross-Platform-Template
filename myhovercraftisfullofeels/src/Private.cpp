@@ -6,7 +6,7 @@
 
 #include "Private.hpp"
 
-namespace com::saxbophone::project::PRIVATE {
+namespace com::saxbophone::myhovercraftisfullofeels::PRIVATE {
     bool library_works() {
         return true;
     }
