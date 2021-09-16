@@ -12,7 +12,7 @@ target_link_libraries(
     PRIVATE
         my-hovercraft-is-full-of-eels-compiler-options  # tests use same compiler options as main project
         my-hovercraft-is-full-of-eels
-        Catch2::Catch2                             # unit testing framework
+        Catch2::Catch2  # unit testing framework
 )
 
 enable_testing()
