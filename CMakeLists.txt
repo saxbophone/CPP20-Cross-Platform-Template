@@ -71,7 +71,7 @@ set(MY_HOVERCRAFT_IS_FULL_OF_EELS_ESCAPED_VERSION_STRING "\"${MY_HOVERCRAFT_IS_F
 # used for my-hovercraft-is-full-of-eels and its tests. This is to avoid setting global compiler
 # options which would be inherited by dependencies as well, which is bad
 # because my-hovercraft-is-full-of-eels uses strict compiler warning options which not all other
-# my-hovercraft-is-full-of-eelss can build successfully with.
+# projects can build successfully with.
 # Any target linked with this one will inherit the compiler options used for
 # my-hovercraft-is-full-of-eels.
 add_library(my-hovercraft-is-full-of-eels-compiler-options INTERFACE)
@@ -137,7 +137,7 @@ include(CPM)
 
 # library
 add_subdirectory(my-hovercraft-is-full-of-eels)
-# unit tests --only enable if requested AND we're not building as a sub-my-hovercraft-is-full-of-eels
+# unit tests --only enable if requested AND we're not building as a sub-project
 if(ENABLE_TESTS AND NOT MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBPROJECT)
     message(STATUS "[my-hovercraft-is-full-of-eels] Unit Tests Enabled")
     add_subdirectory(tests)
