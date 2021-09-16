@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  build:
+  build-release:
     runs-on: ${{ matrix.os }}
     env:
       BUILD_TYPE: Release
@@ -57,3 +57,33 @@ jobs:
         with:
           name: project_build_${{ github.run_number }}_${{ matrix.platform_name }}
           path: ${{github.workspace}}/artifacts
+  build-docs:
+    runs-on: ubuntu-20.04
+    # don't deploy docs unless release build succeeds
+    needs: build-release
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Tag Name
+        shell: bash
+        # trim prefix from ref to get tag name
+        run: echo "TAG_NAME=${GITHUB_REF#'refs/tags/'}" >> $GITHUB_ENV
+      - name: Format Docs Version Name
+        shell: bash
+        # trim patch version off version number as minor version specifies ABI changes
+        run: echo "DOCS_VERSION=${TAG_NAME%.*}" >> $GITHUB_ENV
+      - name: Build Doxygen Docs
+        uses: mattnotmitt/doxygen-action@v1.3.3
+      - name: Set up latest docs auto-linking
+        shell: bash
+        working-directory: ${{github.workspace}}
+        # make docs folder, move docs there, call script to generate HTML redirect in index
+        run: |
+          mkdir docs
+          cp -R html docs/$DOCS_VERSION
+          ./generate_index $DOCS_VERSION
+      - name: Deploy Docs to github-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: false
