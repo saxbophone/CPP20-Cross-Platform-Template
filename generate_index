@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# This script generates a tiny HTML file whose sole purpose is to
+# redirect to whichever folder the latest version of the docs is in
+#
+# This keeps things fairly simple, if a little clunky, as Github Pages
+# is a static site hosting service only (unless you're using Jekyll)
+# and Doxygen didn't support multi-version documentation sites at the
+# time of writing.
+
+# pass version string for where the latest docs are as single parameter
+DOCS_VERSION=$1;
+# HTML template with DOCS_VERSION substituted
+HTML_FRAGMENT="<head><meta http-equiv='refresh' content='0; URL=${DOCS_VERSION}/'/></head><body><p>If you are not redirected in five seconds,<a href='${DOCS_VERSION}/'>click here</a>.</p></body>";
+# write out to the index HTML file that will appear at the root of Github Pages
+echo $HTML_FRAGMENT > "docs/index.html";
