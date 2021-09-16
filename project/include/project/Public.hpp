@@ -2,7 +2,7 @@
  * @file
  * This is a sample public compilation unit.
  *
- * @author Your Name <your email address>
+ * @author Your Name <your.email.address@goes.here>
  * @date Creation/Edit Date
  *
  * @copyright Copyright information goes here

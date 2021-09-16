@@ -1,4 +1,4 @@
-/**
+/*
  * This is a sample private compilation unit.
  *
  * <Copyright information goes here>
