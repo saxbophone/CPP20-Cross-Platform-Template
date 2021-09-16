@@ -10,8 +10,8 @@ target_sources(tests PRIVATE main.cpp example.cpp)
 target_link_libraries(
     tests
     PRIVATE
-        myhovercraftisfullofeels-compiler-options  # tests use same compiler options as main project
-        myhovercraftisfullofeels
+        my-hovercraft-is-full-of-eels-compiler-options  # tests use same compiler options as main project
+        my-hovercraft-is-full-of-eels
         Catch2::Catch2                             # unit testing framework
 )
 

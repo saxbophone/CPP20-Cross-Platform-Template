@@ -1,7 +1,7 @@
 # Doxyfile 1.8.11
 
 # This file describes the settings to be used by the documentation system
-# doxygen (www.doxygen.org) for a myhovercraftisfullofeels.
+# doxygen (www.doxygen.org) for a my-hovercraft-is-full-of-eels.
 #
 # All text after a double hash (##) is considered a comment and is placed in
 # front of the TAG it is preceding.
@@ -26,32 +26,32 @@
 
 DOXYFILE_ENCODING      = UTF-8
 
-# The MYHOVERCRAFTISFULLOFEELS_NAME tag is a single word (or a sequence of words surrounded by
+# The MY_HOVERCRAFT_IS_FULL_OF_EELS_NAME tag is a single word (or a sequence of words surrounded by
 # double-quotes, unless you are using Doxywizard) that should identify the
-# myhovercraftisfullofeels for which the documentation is generated. This name is used in the
+# my-hovercraft-is-full-of-eels for which the documentation is generated. This name is used in the
 # title of most generated pages and in a few other places.
 # The default value is: My MyHovercraftIsFullOfEels.
 
-MYHOVERCRAFTISFULLOFEELS_NAME           = "C++20 Cross Platform Template"
+MY_HOVERCRAFT_IS_FULL_OF_EELS_NAME           = "C++20 Cross Platform Template"
 
-# The MYHOVERCRAFTISFULLOFEELS_NUMBER tag can be used to enter a myhovercraftisfullofeels or revision number. This
+# The MY_HOVERCRAFT_IS_FULL_OF_EELS_NUMBER tag can be used to enter a my-hovercraft-is-full-of-eels or revision number. This
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-MYHOVERCRAFTISFULLOFEELS_NUMBER         = $(TAG_NAME)
+MY_HOVERCRAFT_IS_FULL_OF_EELS_NUMBER         = $(TAG_NAME)
 
-# Using the MYHOVERCRAFTISFULLOFEELS_BRIEF tag one can provide an optional one line description
-# for a myhovercraftisfullofeels that appears at the top of each page and should give viewer a
-# quick idea about the purpose of the myhovercraftisfullofeels. Keep the description short.
+# Using the MY_HOVERCRAFT_IS_FULL_OF_EELS_BRIEF tag one can provide an optional one line description
+# for a my-hovercraft-is-full-of-eels that appears at the top of each page and should give viewer a
+# quick idea about the purpose of the my-hovercraft-is-full-of-eels. Keep the description short.
 
-MYHOVERCRAFTISFULLOFEELS_BRIEF          =
+MY_HOVERCRAFT_IS_FULL_OF_EELS_BRIEF          =
 
-# With the MYHOVERCRAFTISFULLOFEELS_LOGO tag one can specify a logo or an icon that is included
+# With the MY_HOVERCRAFT_IS_FULL_OF_EELS_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-MYHOVERCRAFTISFULLOFEELS_LOGO           =
+MY_HOVERCRAFT_IS_FULL_OF_EELS_LOGO           =
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -236,7 +236,7 @@ ALIASES                =
 
 TCL_SUBST              =
 
-# Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your myhovercraftisfullofeels consists of C sources
+# Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your my-hovercraft-is-full-of-eels consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
 # instance, some of the names that are used will be different. The list of all
 # members will be omitted, etc.
@@ -244,7 +244,7 @@ TCL_SUBST              =
 
 OPTIMIZE_OUTPUT_FOR_C  = NO
 
-# Set the OPTIMIZE_OUTPUT_JAVA tag to YES if your myhovercraftisfullofeels consists of Java or
+# Set the OPTIMIZE_OUTPUT_JAVA tag to YES if your my-hovercraft-is-full-of-eels consists of Java or
 # Python sources only. Doxygen will then generate output that is more tailored
 # for that language. For instance, namespaces will be presented as packages,
 # qualified scopes will look different, etc.
@@ -252,13 +252,13 @@ OPTIMIZE_OUTPUT_FOR_C  = NO
 
 OPTIMIZE_OUTPUT_JAVA   = NO
 
-# Set the OPTIMIZE_FOR_FORTRAN tag to YES if your myhovercraftisfullofeels consists of Fortran
+# Set the OPTIMIZE_FOR_FORTRAN tag to YES if your my-hovercraft-is-full-of-eels consists of Fortran
 # sources. Doxygen will then generate output that is tailored for Fortran.
 # The default value is: NO.
 
 OPTIMIZE_FOR_FORTRAN   = NO
 
-# Set the OPTIMIZE_OUTPUT_VHDL tag to YES if your myhovercraftisfullofeels consists of VHDL
+# Set the OPTIMIZE_OUTPUT_VHDL tag to YES if your my-hovercraft-is-full-of-eels consists of VHDL
 # sources. Doxygen will then generate output that is tailored for VHDL.
 # The default value is: NO.
 
@@ -285,7 +285,7 @@ EXTENSION_MAPPING      =
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
-# documentation. See http://daringfireball.net/myhovercraftisfullofeelss/markdown/ for details.
+# documentation. See http://daringfireball.net/my-hovercraft-is-full-of-eelss/markdown/ for details.
 # The output of markdown processing is further processed by doxygen, so you can
 # mix doxygen, HTML, and XML commands with Markdown formatting. Disable only in
 # case of backward compatibilities issues.
@@ -317,7 +317,7 @@ BUILTIN_STL_SUPPORT    = YES
 
 CPP_CLI_SUPPORT        = NO
 
-# Set the SIP_SUPPORT tag to YES if your myhovercraftisfullofeels consists of sip (see:
+# Set the SIP_SUPPORT tag to YES if your my-hovercraft-is-full-of-eels consists of sip (see:
 # http://www.riverbankcomputing.co.uk/software/sip/intro) sources only. Doxygen
 # will parse them like normal C++ but will assume all classes use public instead
 # of private inheritance when no explicit protection keyword is present.
@@ -767,11 +767,11 @@ WARN_LOGFILE           =
 
 # The INPUT tag is used to specify the files and/or directories that contain
 # documented source files. You may enter file names like myfile.cpp or
-# directories like /usr/src/mymyhovercraftisfullofeels. Separate the files or directories with
+# directories like /usr/src/mymy-hovercraft-is-full-of-eels. Separate the files or directories with
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = myhovercraftisfullofeels
+INPUT                  = my-hovercraft-is-full-of-eels
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -917,7 +917,7 @@ FILTER_SOURCE_PATTERNS =
 
 # If the USE_MDFILE_AS_MAINPAGE tag refers to the name of a markdown file that
 # is part of the input, its contents will be placed on the main page
-# (index.html). This can be useful if you have a myhovercraftisfullofeels on for instance GitHub
+# (index.html). This can be useful if you have a my-hovercraft-is-full-of-eels on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
 USE_MDFILE_AS_MAINPAGE =
@@ -1032,7 +1032,7 @@ CLANG_OPTIONS          =
 #---------------------------------------------------------------------------
 
 # If the ALPHABETICAL_INDEX tag is set to YES, an alphabetical index of all
-# compounds will be generated. Enable this if the myhovercraftisfullofeels contains a lot of
+# compounds will be generated. Enable this if the my-hovercraft-is-full-of-eels contains a lot of
 # classes, structs, unions or interfaces.
 # The default value is: YES.
 
@@ -1045,7 +1045,7 @@ ALPHABETICAL_INDEX     = YES
 
 COLS_IN_ALPHA_INDEX    = 5
 
-# In case all classes in a myhovercraftisfullofeels start with a common prefix, all classes will
+# In case all classes in a my-hovercraft-is-full-of-eels start with a common prefix, all classes will
 # be put under the same header in the alphabetical index. The IGNORE_PREFIX tag
 # can be used to specify a prefix (or a list of prefixes) that should be ignored
 # while generating the index headers.
@@ -1248,7 +1248,7 @@ DOCSET_PUBLISHER_NAME  = Publisher
 
 # If the GENERATE_HTMLHELP tag is set to YES then doxygen generates three
 # additional HTML index files: index.hhp, index.hhc, and index.hhk. The
-# index.hhp is a myhovercraftisfullofeels file that can be read by Microsoft's HTML Help Workshop
+# index.hhp is a my-hovercraft-is-full-of-eels file that can be read by Microsoft's HTML Help Workshop
 # (see: http://www.microsoft.com/en-us/download/details.aspx?id=21138) on
 # Windows.
 #
@@ -1287,7 +1287,7 @@ HHC_LOCATION           =
 GENERATE_CHI           = NO
 
 # The CHM_INDEX_ENCODING is used to encode HtmlHelp index (hhk), content (hhc)
-# and myhovercraftisfullofeels file content.
+# and my-hovercraft-is-full-of-eels file content.
 # This tag requires that the tag GENERATE_HTMLHELP is set to YES.
 
 CHM_INDEX_ENCODING     =
@@ -1325,7 +1325,7 @@ QCH_FILE               =
 
 # The QHP_NAMESPACE tag specifies the namespace to use when generating Qt Help
 # MyHovercraftIsFullOfEels output. For more information please see Qt Help MyHovercraftIsFullOfEels / Namespace
-# (see: http://qt-myhovercraftisfullofeels.org/doc/qt-4.8/qthelpmyhovercraftisfullofeels.html#namespace).
+# (see: http://qt-my-hovercraft-is-full-of-eels.org/doc/qt-4.8/qthelpmy-hovercraft-is-full-of-eels.html#namespace).
 # The default value is: org.doxygen.MyHovercraftIsFullOfEels.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
@@ -1333,7 +1333,7 @@ QHP_NAMESPACE          = org.doxygen.MyHovercraftIsFullOfEels
 
 # The QHP_VIRTUAL_FOLDER tag specifies the namespace to use when generating Qt
 # Help MyHovercraftIsFullOfEels output. For more information please see Qt Help MyHovercraftIsFullOfEels / Virtual
-# Folders (see: http://qt-myhovercraftisfullofeels.org/doc/qt-4.8/qthelpmyhovercraftisfullofeels.html#virtual-
+# Folders (see: http://qt-my-hovercraft-is-full-of-eels.org/doc/qt-4.8/qthelpmy-hovercraft-is-full-of-eels.html#virtual-
 # folders).
 # The default value is: doc.
 # This tag requires that the tag GENERATE_QHP is set to YES.
@@ -1342,7 +1342,7 @@ QHP_VIRTUAL_FOLDER     = doc
 
 # If the QHP_CUST_FILTER_NAME tag is set, it specifies the name of a custom
 # filter to add. For more information please see Qt Help MyHovercraftIsFullOfEels / Custom
-# Filters (see: http://qt-myhovercraftisfullofeels.org/doc/qt-4.8/qthelpmyhovercraftisfullofeels.html#custom-
+# Filters (see: http://qt-my-hovercraft-is-full-of-eels.org/doc/qt-4.8/qthelpmy-hovercraft-is-full-of-eels.html#custom-
 # filters).
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
@@ -1350,15 +1350,15 @@ QHP_CUST_FILTER_NAME   =
 
 # The QHP_CUST_FILTER_ATTRS tag specifies the list of the attributes of the
 # custom filter to add. For more information please see Qt Help MyHovercraftIsFullOfEels / Custom
-# Filters (see: http://qt-myhovercraftisfullofeels.org/doc/qt-4.8/qthelpmyhovercraftisfullofeels.html#custom-
+# Filters (see: http://qt-my-hovercraft-is-full-of-eels.org/doc/qt-4.8/qthelpmy-hovercraft-is-full-of-eels.html#custom-
 # filters).
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
 QHP_CUST_FILTER_ATTRS  =
 
 # The QHP_SECT_FILTER_ATTRS tag specifies the list of the attributes this
-# myhovercraftisfullofeels's filter section matches. Qt Help MyHovercraftIsFullOfEels / Filter Attributes (see:
-# http://qt-myhovercraftisfullofeels.org/doc/qt-4.8/qthelpmyhovercraftisfullofeels.html#filter-attributes).
+# my-hovercraft-is-full-of-eels's filter section matches. Qt Help MyHovercraftIsFullOfEels / Filter Attributes (see:
+# http://qt-my-hovercraft-is-full-of-eels.org/doc/qt-4.8/qthelpmy-hovercraft-is-full-of-eels.html#filter-attributes).
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
 QHP_SECT_FILTER_ATTRS  =
@@ -1410,7 +1410,7 @@ DISABLE_INDEX          = NO
 # HTML help feature. Via custom style sheets (see HTML_EXTRA_STYLESHEET) one can
 # further fine-tune the look of the index. As an example, the default style
 # sheet generated by doxygen has an example that shows how to put an image at
-# the root of the tree instead of the MYHOVERCRAFTISFULLOFEELS_NAME. Since the tree basically has
+# the root of the tree instead of the MY_HOVERCRAFT_IS_FULL_OF_EELS_NAME. Since the tree basically has
 # the same information as the tab index, you could consider setting
 # DISABLE_INDEX to YES when enabling this option.
 # The default value is: NO.
@@ -1516,7 +1516,7 @@ MATHJAX_CODEFILE       =
 # should work on any modern browser. Note that when using HTML help
 # (GENERATE_HTMLHELP), Qt help (GENERATE_QHP), or docsets (GENERATE_DOCSET)
 # there is already a search function so this one should typically be disabled.
-# For large myhovercraftisfullofeelss the javascript based search engine can be slow, then
+# For large my-hovercraft-is-full-of-eelss the javascript based search engine can be slow, then
 # enabling SERVER_BASED_SEARCH may provide a better solution. It is possible to
 # search using the keyboard; to jump to the search box use <access key> + S
 # (what the <access key> is depends on the OS and browser, but it is typically
@@ -1580,16 +1580,16 @@ SEARCHENGINE_URL       =
 SEARCHDATA_FILE        = searchdata.xml
 
 # When SERVER_BASED_SEARCH and EXTERNAL_SEARCH are both enabled the
-# EXTERNAL_SEARCH_ID tag can be used as an identifier for the myhovercraftisfullofeels. This is
+# EXTERNAL_SEARCH_ID tag can be used as an identifier for the my-hovercraft-is-full-of-eels. This is
 # useful in combination with EXTRA_SEARCH_MAPPINGS to search through multiple
-# myhovercraftisfullofeelss and redirect the results back to the right myhovercraftisfullofeels.
+# my-hovercraft-is-full-of-eelss and redirect the results back to the right my-hovercraft-is-full-of-eels.
 # This tag requires that the tag SEARCHENGINE is set to YES.
 
 EXTERNAL_SEARCH_ID     =
 
 # The EXTRA_SEARCH_MAPPINGS tag can be used to enable searching through doxygen
-# myhovercraftisfullofeelss other than the one defined by this configuration file, but that are
-# all added to the same external search index. Each myhovercraftisfullofeels needs to have a
+# my-hovercraft-is-full-of-eelss other than the one defined by this configuration file, but that are
+# all added to the same external search index. Each my-hovercraft-is-full-of-eels needs to have a
 # unique id set via EXTERNAL_SEARCH_ID. The search mapping then maps the id of
 # to a relative location where the documentation can be found. The format is:
 # EXTRA_SEARCH_MAPPINGS = tagname1=loc1 tagname2=loc2 ...
@@ -1633,7 +1633,7 @@ LATEX_CMD_NAME         = latex
 MAKEINDEX_CMD_NAME     = makeindex
 
 # If the COMPACT_LATEX tag is set to YES, doxygen generates more compact LaTeX
-# documents. This may be useful for small myhovercraftisfullofeelss and may help to save some
+# documents. This may be useful for small my-hovercraft-is-full-of-eelss and may help to save some
 # trees in general.
 # The default value is: NO.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
@@ -1669,8 +1669,8 @@ EXTRA_PACKAGES         =
 #
 # Note: Only use a user-defined header if you know what you are doing! The
 # following commands have a special meaning inside the header: $title,
-# $datetime, $date, $doxygenversion, $myhovercraftisfullofeelsname, $myhovercraftisfullofeelsnumber,
-# $myhovercraftisfullofeelsbrief, $myhovercraftisfullofeelslogo. Doxygen will replace $title with the empty
+# $datetime, $date, $doxygenversion, $my-hovercraft-is-full-of-eelsname, $my-hovercraft-is-full-of-eelsnumber,
+# $my-hovercraft-is-full-of-eelsbrief, $my-hovercraft-is-full-of-eelslogo. Doxygen will replace $title with the empty
 # string, for the replacement values of the other commands the user is referred
 # to HTML_HEADER.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
@@ -1786,7 +1786,7 @@ GENERATE_RTF           = NO
 RTF_OUTPUT             = rtf
 
 # If the COMPACT_RTF tag is set to YES, doxygen generates more compact RTF
-# documents. This may be useful for small myhovercraftisfullofeelss and may help to save some
+# documents. This may be useful for small my-hovercraft-is-full-of-eelss and may help to save some
 # trees in general.
 # The default value is: NO.
 # This tag requires that the tag GENERATE_RTF is set to YES.
@@ -2091,14 +2091,14 @@ GENERATE_TAGFILE       =
 ALLEXTERNALS           = NO
 
 # If the EXTERNAL_GROUPS tag is set to YES, all external groups will be listed
-# in the modules index. If set to NO, only the current myhovercraftisfullofeels's groups will be
+# in the modules index. If set to NO, only the current my-hovercraft-is-full-of-eels's groups will be
 # listed.
 # The default value is: YES.
 
 EXTERNAL_GROUPS        = YES
 
 # If the EXTERNAL_PAGES tag is set to YES, all external pages will be listed in
-# the related pages index. If set to NO, only the current myhovercraftisfullofeels's pages will
+# the related pages index. If set to NO, only the current my-hovercraft-is-full-of-eels's pages will
 # be listed.
 # The default value is: YES.
 

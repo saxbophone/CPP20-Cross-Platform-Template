@@ -4,12 +4,12 @@ cmake_minimum_required(VERSION 3.15)
 
 # detect if MyHovercraftIsFullOfEels is being used as a sub-project of another CMake project
 if(NOT DEFINED PROJECT_NAME)
-    set(MYHOVERCRAFTISFULLOFEELS_SUBPROJECT OFF)
+    set(MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBPROJECT OFF)
 else()
-    set(MYHOVERCRAFTISFULLOFEELS_SUBPROJECT ON)
+    set(MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBPROJECT ON)
 endif()
 
-project(myhovercraftisfullofeels VERSION 0.3.0 LANGUAGES CXX)
+project(my-hovercraft-is-full-of-eels VERSION 0.3.0 LANGUAGES CXX)
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
@@ -27,24 +27,24 @@ endif()
 
 # set some handy custom variables to detect Release-type builds from Debug-type ones
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(MYHOVERCRAFTISFULLOFEELS_BUILD_DEBUG ON)
-    set(MYHOVERCRAFTISFULLOFEELS_BUILD_RELEASE OFF)
+    set(MY_HOVERCRAFT_IS_FULL_OF_EELS_BUILD_DEBUG ON)
+    set(MY_HOVERCRAFT_IS_FULL_OF_EELS_BUILD_RELEASE OFF)
 else()
-    set(MYHOVERCRAFTISFULLOFEELS_BUILD_DEBUG OFF)
-    set(MYHOVERCRAFTISFULLOFEELS_BUILD_RELEASE ON)
+    set(MY_HOVERCRAFT_IS_FULL_OF_EELS_BUILD_DEBUG OFF)
+    set(MY_HOVERCRAFT_IS_FULL_OF_EELS_BUILD_RELEASE ON)
 endif()
 
-message(STATUS "[myhovercraftisfullofeels] Build Mode: ${CMAKE_BUILD_TYPE}")
+message(STATUS "[my-hovercraft-is-full-of-eels] Build Mode: ${CMAKE_BUILD_TYPE}")
 
 # set the C++ standard to use to C++20 always
-set(MYHOVERCRAFTISFULLOFEELS_CXX_STANDARD "20")
-message(STATUS "[myhovercraftisfullofeels] C++ Standard set to C++${MYHOVERCRAFTISFULLOFEELS_CXX_STANDARD}")
-set(CMAKE_CXX_STANDARD ${MYHOVERCRAFTISFULLOFEELS_CXX_STANDARD})
+set(MY_HOVERCRAFT_IS_FULL_OF_EELS_CXX_STANDARD "20")
+message(STATUS "[my-hovercraft-is-full-of-eels] C++ Standard set to C++${MY_HOVERCRAFT_IS_FULL_OF_EELS_CXX_STANDARD}")
+set(CMAKE_CXX_STANDARD ${MY_HOVERCRAFT_IS_FULL_OF_EELS_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CMakeDependentOption)
 # if building in Release mode, provide an option to explicitly enable tests if desired (always ON for other builds, OFF by default for Release builds)
-cmake_dependent_option(ENABLE_TESTS "Build the unit tests in release mode?" OFF MYHOVERCRAFTISFULLOFEELS_BUILD_RELEASE ON)
+cmake_dependent_option(ENABLE_TESTS "Build the unit tests in release mode?" OFF MY_HOVERCRAFT_IS_FULL_OF_EELS_BUILD_RELEASE ON)
 
 # Premature Optimisation causes problems. Commented out code below allows detection and enabling of LTO.
 # It's not being used currently because it seems to cause linker errors with Clang++ on Ubuntu if the library
@@ -54,37 +54,37 @@ cmake_dependent_option(ENABLE_TESTS "Build the unit tests in release mode?" OFF 
 
 # include(CheckIPOSupported)
 # check_ipo_supported(RESULT IPO_SUPPORTED)
-# # If we're in Release mode, set MYHOVERCRAFTISFULLOFEELS_USE_IPO to ON by default if it's detected as supported (user can always explicitly enable it in Release mode)
-# cmake_dependent_option(MYHOVERCRAFTISFULLOFEELS_USE_IPO "Use Link-Time/Inter-Procedural Optimisation?" ${IPO_SUPPORTED} MYHOVERCRAFTISFULLOFEELS_BUILD_RELEASE OFF)
-# if(MYHOVERCRAFTISFULLOFEELS_USE_IPO)
-#     message(STATUS "[myhovercraftisfullofeels] Link-Time-Optimisation Enabled")
+# # If we're in Release mode, set MY_HOVERCRAFT_IS_FULL_OF_EELS_USE_IPO to ON by default if it's detected as supported (user can always explicitly enable it in Release mode)
+# cmake_dependent_option(MY_HOVERCRAFT_IS_FULL_OF_EELS_USE_IPO "Use Link-Time/Inter-Procedural Optimisation?" ${IPO_SUPPORTED} MY_HOVERCRAFT_IS_FULL_OF_EELS_BUILD_RELEASE OFF)
+# if(MY_HOVERCRAFT_IS_FULL_OF_EELS_USE_IPO)
+#     message(STATUS "[my-hovercraft-is-full-of-eels] Link-Time-Optimisation Enabled")
 # endif()
 
 set(
-    MYHOVERCRAFTISFULLOFEELS_VERSION_STRING
+    MY_HOVERCRAFT_IS_FULL_OF_EELS_VERSION_STRING
     "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
 )
-set(MYHOVERCRAFTISFULLOFEELS_ESCAPED_VERSION_STRING "\"${MYHOVERCRAFTISFULLOFEELS_VERSION_STRING}\"")
+set(MY_HOVERCRAFT_IS_FULL_OF_EELS_ESCAPED_VERSION_STRING "\"${MY_HOVERCRAFT_IS_FULL_OF_EELS_VERSION_STRING}\"")
 # end basic metadata
 
 # This is a special target which only exists to capture compilation options
-# used for myhovercraftisfullofeels and its tests. This is to avoid setting global compiler
+# used for my-hovercraft-is-full-of-eels and its tests. This is to avoid setting global compiler
 # options which would be inherited by dependencies as well, which is bad
-# because myhovercraftisfullofeels uses strict compiler warning options which not all other
-# myhovercraftisfullofeelss can build successfully with.
+# because my-hovercraft-is-full-of-eels uses strict compiler warning options which not all other
+# my-hovercraft-is-full-of-eelss can build successfully with.
 # Any target linked with this one will inherit the compiler options used for
-# myhovercraftisfullofeels.
-add_library(myhovercraftisfullofeels-compiler-options INTERFACE)
+# my-hovercraft-is-full-of-eels.
+add_library(my-hovercraft-is-full-of-eels-compiler-options INTERFACE)
 
 # used for enabling additional compiler options if supported
 include(CheckCXXCompilerFlag)
 
 function(enable_cxx_compiler_flag_if_supported flag)
-    message(STATUS "[myhovercraftisfullofeels] Checking if compiler supports warning flag '${flag}'")
+    message(STATUS "[my-hovercraft-is-full-of-eels] Checking if compiler supports warning flag '${flag}'")
     check_cxx_compiler_flag("${flag}" flag_supported)
     if(flag_supported)
-        message(STATUS "[myhovercraftisfullofeels] Enabling warning flag '${flag}'")
-        target_compile_options(myhovercraftisfullofeels-compiler-options INTERFACE "${flag}")
+        message(STATUS "[my-hovercraft-is-full-of-eels] Enabling warning flag '${flag}'")
+        target_compile_options(my-hovercraft-is-full-of-eels-compiler-options INTERFACE "${flag}")
     endif()
     unset(flag_supported CACHE)
 endfunction()
@@ -136,10 +136,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mo
 include(CPM)
 
 # library
-add_subdirectory(myhovercraftisfullofeels)
-# unit tests --only enable if requested AND we're not building as a sub-myhovercraftisfullofeels
-if(ENABLE_TESTS AND NOT MYHOVERCRAFTISFULLOFEELS_SUBPROJECT)
-    message(STATUS "[myhovercraftisfullofeels] Unit Tests Enabled")
+add_subdirectory(my-hovercraft-is-full-of-eels)
+# unit tests --only enable if requested AND we're not building as a sub-my-hovercraft-is-full-of-eels
+if(ENABLE_TESTS AND NOT MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBPROJECT)
+    message(STATUS "[my-hovercraft-is-full-of-eels] Unit Tests Enabled")
     add_subdirectory(tests)
     enable_testing()
 endif()

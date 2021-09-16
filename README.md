@@ -21,13 +21,14 @@ A template for a cross-platform C++20 project including modern CMake, unit-testi
 1. Click the <kbd>Use this template</kbd> button at the top of this page to create your own new copy of this template
 2. Fill in the project details on the next page as you desire
 3. Once you've got your new project produced from this template, do a find-and-replace globally within the project with the following substitutions:
-    - `myhovercraftisfullofeels` -> your project name in lowercase. You could use `-` to separate words if you like.
+    - `my-hovercraft-is-full-of-eels` -> your project name in lowercase. You could use `-` to separate words if you like.
     - `MyHovercraftIsFullOfEels` -> your project name in UpperCamelCase. Recommended to capitalise each word.
-    - `MYHOVERCRAFTISFULLOFEELS` -> your project name in UPPER_SNAKE_CASE. Recommended to separate at the words.
+    - `MY_HOVERCRAFT_IS_FULL_OF_EELS` -> your project name in UPPER_SNAKE_CASE. Recommended to separate at the words.
+    - `com::saxbophone::my_hovercraft_is_full_of_eels` -> an appropriate C++ namespace for your project.
 
     Also rename the following directories in the same way:
-    - `myhovercraftisfullofeels`
-    - `myhovercraftisfullofeels/include/myhovercraftisfullofeels`
+    - `my-hovercraft-is-full-of-eels`
+    - `my-hovercraft-is-full-of-eels/include/my-hovercraft-is-full-of-eels`
 
     - **Choose a Software License for your code** if it is open-source and you want other people to be able to use it with ease!
 

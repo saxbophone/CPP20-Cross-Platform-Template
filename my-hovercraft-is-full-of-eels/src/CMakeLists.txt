@@ -1,6 +1,6 @@
 # top-level namespace source files
 target_sources(
-    myhovercraftisfullofeels
+    my-hovercraft-is-full-of-eels
         PRIVATE
             Private.cpp
             Public.cpp
