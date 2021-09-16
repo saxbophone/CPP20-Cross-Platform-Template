@@ -14,10 +14,10 @@
  *
  */
 
-#ifndef COM_SAXBOPHONE_PROJECT_PUBLIC_HPP
-#define COM_SAXBOPHONE_PROJECT_PUBLIC_HPP
+#ifndef COM_SAXBOPHONE_MY_HOVERCRAFT_IS_FULL_OF_EELS_PUBLIC_HPP
+#define COM_SAXBOPHONE_MY_HOVERCRAFT_IS_FULL_OF_EELS_PUBLIC_HPP
 
-namespace com::saxbophone::project {
+namespace com::saxbophone::my_hovercraft_is_full_of_eels {
     /**
      * @brief Stub test function for sample project
      * @returns Whether the test library "works" or not, which is a vague

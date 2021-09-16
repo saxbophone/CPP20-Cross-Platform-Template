@@ -55,7 +55,7 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: project_build_${{ github.run_number }}_${{ matrix.platform_name }}
+          name: my-hovercraft-is-full-of-eels_build_${{ github.run_number }}_${{ matrix.platform_name }}
           path: ${{github.workspace}}/artifacts
   build-docs:
     runs-on: ubuntu-20.04
