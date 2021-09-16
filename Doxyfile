@@ -30,7 +30,7 @@ DOXYFILE_ENCODING      = UTF-8
 # double-quotes, unless you are using Doxywizard) that should identify the
 # project for which the documentation is generated. This name is used in the
 # title of most generated pages and in a few other places.
-# The default value is: My MyHovercraftIsFullOfEels.
+# The default value is: My Project.
 
 PROJECT_NAME           = "C++20 Cross Platform Template"
 
@@ -1227,10 +1227,10 @@ DOCSET_FEEDNAME        = "Doxygen generated docs"
 # This tag specifies a string that should uniquely identify the documentation
 # set bundle. This should be a reverse domain-name style string, e.g.
 # com.mycompany.MyDocSet. Doxygen will append .docset to the name.
-# The default value is: org.doxygen.MyHovercraftIsFullOfEels.
+# The default value is: org.doxygen.Project.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_BUNDLE_ID       = org.doxygen.MyHovercraftIsFullOfEels
+DOCSET_BUNDLE_ID       = org.doxygen.Project
 
 # The DOCSET_PUBLISHER_ID tag specifies a string that should uniquely identify
 # the documentation publisher. This should be a reverse domain-name style
@@ -1324,15 +1324,15 @@ GENERATE_QHP           = NO
 QCH_FILE               =
 
 # The QHP_NAMESPACE tag specifies the namespace to use when generating Qt Help
-# MyHovercraftIsFullOfEels output. For more information please see Qt Help MyHovercraftIsFullOfEels / Namespace
+# Project output. For more information please see Qt Help Project / Namespace
 # (see: http://qt-project.org/doc/qt-4.8/qthelpproject.html#namespace).
-# The default value is: org.doxygen.MyHovercraftIsFullOfEels.
+# The default value is: org.doxygen.Project.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHP_NAMESPACE          = org.doxygen.MyHovercraftIsFullOfEels
+QHP_NAMESPACE          = org.doxygen.Project
 
 # The QHP_VIRTUAL_FOLDER tag specifies the namespace to use when generating Qt
-# Help MyHovercraftIsFullOfEels output. For more information please see Qt Help MyHovercraftIsFullOfEels / Virtual
+# Help Project output. For more information please see Qt Help Project / Virtual
 # Folders (see: http://qt-project.org/doc/qt-4.8/qthelpproject.html#virtual-
 # folders).
 # The default value is: doc.
@@ -1341,7 +1341,7 @@ QHP_NAMESPACE          = org.doxygen.MyHovercraftIsFullOfEels
 QHP_VIRTUAL_FOLDER     = doc
 
 # If the QHP_CUST_FILTER_NAME tag is set, it specifies the name of a custom
-# filter to add. For more information please see Qt Help MyHovercraftIsFullOfEels / Custom
+# filter to add. For more information please see Qt Help Project / Custom
 # Filters (see: http://qt-project.org/doc/qt-4.8/qthelpproject.html#custom-
 # filters).
 # This tag requires that the tag GENERATE_QHP is set to YES.
@@ -1349,7 +1349,7 @@ QHP_VIRTUAL_FOLDER     = doc
 QHP_CUST_FILTER_NAME   =
 
 # The QHP_CUST_FILTER_ATTRS tag specifies the list of the attributes of the
-# custom filter to add. For more information please see Qt Help MyHovercraftIsFullOfEels / Custom
+# custom filter to add. For more information please see Qt Help Project / Custom
 # Filters (see: http://qt-project.org/doc/qt-4.8/qthelpproject.html#custom-
 # filters).
 # This tag requires that the tag GENERATE_QHP is set to YES.
@@ -1357,7 +1357,7 @@ QHP_CUST_FILTER_NAME   =
 QHP_CUST_FILTER_ATTRS  =
 
 # The QHP_SECT_FILTER_ATTRS tag specifies the list of the attributes this
-# project's filter section matches. Qt Help MyHovercraftIsFullOfEels / Filter Attributes (see:
+# project's filter section matches. Qt Help Project / Filter Attributes (see:
 # http://qt-project.org/doc/qt-4.8/qthelpproject.html#filter-attributes).
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
@@ -1385,10 +1385,10 @@ GENERATE_ECLIPSEHELP   = NO
 # A unique identifier for the Eclipse help plugin. When installing the plugin
 # the directory name containing the HTML and XML files should also have this
 # name. Each documentation set should have its own identifier.
-# The default value is: org.doxygen.MyHovercraftIsFullOfEels.
+# The default value is: org.doxygen.Project.
 # This tag requires that the tag GENERATE_ECLIPSEHELP is set to YES.
 
-ECLIPSE_DOC_ID         = org.doxygen.MyHovercraftIsFullOfEels
+ECLIPSE_DOC_ID         = org.doxygen.Project
 
 # If you want full control over the layout of the generated HTML pages it might
 # be necessary to disable the index and replace it with your own. The
