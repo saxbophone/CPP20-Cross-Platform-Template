@@ -11,6 +11,6 @@
 # pass version string for where the latest docs are as single parameter
 DOCS_VERSION=$1;
 # HTML template with DOCS_VERSION substituted
-HTML_FRAGMENT="<head><meta http-equiv='refresh' content='0; URL=${DOCS_VERSION}/'/></head><body><p>If you are not redirected in five seconds,<a href='${DOCS_VERSION}/'>click here</a>.</p></body>";
+HTML_FRAGMENT="<!DOCTYPE html><html lang='en'><head><meta http-equiv='refresh' content='0; URL=${DOCS_VERSION}/'/><title>Redirecting...</title></head><body><p>If you are not redirected in five seconds,<a href='${DOCS_VERSION}/'>click here</a>.</p></body></html>";
 # write out to the index HTML file that will appear at the root of Github Pages
 echo $HTML_FRAGMENT > "docs/index.html";
