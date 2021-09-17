@@ -9,7 +9,7 @@ else()
     set(MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBPROJECT ON)
 endif()
 
-project(my-hovercraft-is-full-of-eels VERSION 0.4.0 LANGUAGES CXX)
+project(my-hovercraft-is-full-of-eels VERSION 0.4.1 LANGUAGES CXX)
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
