@@ -40,7 +40,7 @@ target_link_libraries(
 )
 
 # install if we're not being built as a sub-project
-if (NOT MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBMY_HOVERCRAFT_IS_FULL_OF_EELS)
+if (NOT MY_HOVERCRAFT_IS_FULL_OF_EELS_SUBPROJECT)
     # library
     install(
         TARGETS my-hovercraft-is-full-of-eels
