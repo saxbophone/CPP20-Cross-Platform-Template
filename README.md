@@ -1,3 +1,4 @@
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 # CPP20-Cross-Platform-Template
 A template for a cross-platform C++20 project including modern CMake, unit-testing with Catch, cross-platform CI and release builds using using Github Actions.
 
